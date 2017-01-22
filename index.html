@@ -18,7 +18,7 @@
 
         }
         #buttonContainer{
-            width: 253px;
+            width: 270px;
             margin: 0 auto;
         }
         #logo{
@@ -46,7 +46,7 @@
         .active{
             background-color: #E8F2FF;
         }
-        .highlitedButton{
+        .highlightedButton{
             background-color: grey;
         }
         textarea{
@@ -59,12 +59,16 @@
             width: 50%;
             float: left;
             border-left: none;
+            border-bottom: none;
         }
         iframe{
             border: none;
         }
         .hidden{
             display: none;
+        }
+        #outputPanel{
+            background-color: lightcyan;
         }
     </style>
 </head>
@@ -81,10 +85,10 @@
     </div>
 </div>
 <div id="bodyContainer">
-    <textarea id="htmlPanel" class="panel"><p> there!</p></textarea>
-    <textarea id="cssPanel" class="panel hidden">p{color:green;}</textarea>
-    <textarea id="javascriptPanel" class="panel hidden">alert("Hi there!");</textarea>
-    <iframe id="outputPanel" class="panel"> </iframe>
+    <textarea id="htmlPanel" class="panel"></textarea>
+    <textarea id="cssPanel" class="panel hidden"></textarea>
+    <textarea id="javascriptPanel" class="panel hidden"></textarea>
+    <iframe id="outputPanel" class="panel"></iframe>
 </div>
 <script>
     function updateOutput() {
@@ -94,35 +98,35 @@
             "</style></head><body>" +
             $("#htmlPanel").val() +
             "</body></html>");
+        document.getElementById("outputPanel").contentWindow.eval($("#javascriptPanel").val());
     }
 
+
     $(".toggleButton").hover(function () {
-        $(this).addClass("highlitedButton");
+        $(this).addClass("highlightedButton");
     }, function () {
-        $(this).removeClass("highlitedButton");
+        $(this).removeClass("highlightedButton");
     });
 
     $(".toggleButton").click(function () {
         $(this).toggleClass("active");
-        $(this).removeClass("highlitedButton");
+        $(this).removeClass("highlightedButton");
         var panelID = $(this).attr("id") + "Panel";
         $("#" + panelID).toggleClass("hidden");
         var numberOfActiveClass = 4 - $(".hidden").length;
         $(".panel").width(($(window).width() / numberOfActiveClass) - 5);
     });
 
-    $("textarea").height($(window).height()-$("#header").height()-20);
+    $("textarea").height($(window).height()-$("#header").height()-15);
+    $("iframe").height($(window).height()-$("#header").height()-15);
 
-    $(".panel").width(($(window).width()/2) - 50);
+    $(".panel").width(($(window).width()/2) - 3);
 
     updateOutput();
 
     $("textarea").on('change keyup paste', function () {
         updateOutput();
-
     });
-
-
 </script>
 
 </body>
