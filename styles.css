@@ -53,6 +53,9 @@ textarea{
     float: left;
     border-left: none;
     border-bottom: none;
+    margin: 0;
+    padding-left: 10px;
+    padding-top: 10px;
 }
 iframe{
     border: none;

@@ -20,13 +20,13 @@ $(".toggleButton").click(function () {
     var panelID = $(this).attr("id") + "Panel";
     $("#" + panelID).toggleClass("hidden");
     var numberOfActiveClass = 4 - $(".hidden").length;
-    $(".panel").width(($(window).width() / numberOfActiveClass) - 5);
+    $(".panel").width(($(window).width() / numberOfActiveClass) - 15);
 });
 
 $("textarea").height($(window).height()-$("#header").height()-15);
 $("iframe").height($(window).height()-$("#header").height()-15);
 
-$(".panel").width(($(window).width()/2) - 3);
+$(".panel").width(($(window).width()/2) - 13);
 
 updateOutput();
 
