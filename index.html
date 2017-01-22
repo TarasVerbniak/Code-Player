@@ -43,6 +43,12 @@
             border-bottom-right-radius: 4px;
 
         }
+        .active{
+            background-color: #E8F2FF;
+        }
+        .highlitedButton{
+            background-color: grey;
+        }
     </style>
 </head>
 <body>
@@ -51,19 +57,25 @@
         Code Player
     </div>
     <div id="buttonContainer">
-        <div class="toggleButton" id="html">HTML</div>
+        <div class="toggleButton active" id="html">HTML</div>
         <div class="toggleButton" id="css">CSS</div>
         <div class="toggleButton" id="javascript">JavaScript</div>
-        <div class="toggleButton" id="output">Output</div>
+        <div class="toggleButton active" id="output">Output</div>
     </div>
 </div>
 <script>
     $(".toggleButton").hover(function () {
-        $(this).css("background-color", "grey");
+        $(this).addClass("highlitedButton");
     }, function () {
-        $(this).css("background-color", "#EEEEEE");
-        }
-    );
+        $(this).removeClass("highlitedButton");
+    });
+
+    $(".toggleButton").click(function () {
+        $(this).toggleClass("active");
+        $(this).removeClass("highlitedButton");
+        alert("test");
+    });
+
 </script>
 
 </body>
