@@ -81,12 +81,22 @@
     </div>
 </div>
 <div id="bodyContainer">
-    <textarea id="htmlPanel" class="panel">Hi there!</textarea>
-    <textarea id="cssPanel" class="panel hidden">p{color:"green"}</textarea>
+    <textarea id="htmlPanel" class="panel"><p> there!</p></textarea>
+    <textarea id="cssPanel" class="panel hidden">p{color:green;}</textarea>
     <textarea id="javascriptPanel" class="panel hidden">alert("Hi there!");</textarea>
     <iframe id="outputPanel" class="panel"> </iframe>
 </div>
 <script>
+    function updateOutput() {
+        $("iframe").contents().find("html").html(
+            "<html><head><style type='text/css'>" +
+            $("#cssPanel").val() +
+            "</style></head><body>" +
+            $("#htmlPanel").val() +
+            "</body></html>");
+        eval($("#javascriptPanel").val());
+    }
+
     $(".toggleButton").hover(function () {
         $(this).addClass("highlitedButton");
     }, function () {
@@ -96,23 +106,21 @@
     $(".toggleButton").click(function () {
         $(this).toggleClass("active");
         $(this).removeClass("highlitedButton");
-        var pannelID = $(this).attr("id") + "Panel";
-        $("#" + pannelID).toggleClass("hidden");
+        var panelID = $(this).attr("id") + "Panel";
+        $("#" + panelID).toggleClass("hidden");
         var numberOfActiveClass = 4 - $(".hidden").length;
         $(".panel").width(($(window).width() / numberOfActiveClass) - 5);
     });
 
     $("textarea").height($(window).height()-$("#header").height()-20);
 
-    $(".pannel").width(($(window).width()/2) - 5);
+    $(".panel").width(($(window).width()/2) - 50);
 
-    $("textarea").on("change keyup paste", function () {
-        $("iframe").contents().find("html").html(
-            "<html><head><style type='text/css'>" +
-            $("#cssPanel").val() +
-            "</style></head><body>" +
-            $("#htmlPanel").val() +
-            "</body></html>");
+    updateOutput();
+
+    $("textarea").on('change keyup paste', function () {
+        updateOutput();
+
     });
 
 
